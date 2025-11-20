@@ -11,6 +11,8 @@ class MovieService(private val movieRepository: MovieRepository) {
         return movieRepository.findById(id)
     }
 
-
+    fun findAll(): List<Movie> {
+        return movieRepository.findAll()
+    }
 
 }

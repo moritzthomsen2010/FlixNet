@@ -18,4 +18,8 @@ class MovieController(private val movieService: MovieService) {
         return ok(movieService.findById(id))
     }
 
+    @GetMapping
+    fun getAllMovies(): ResponseEntity<List<Movie>> {
+        return ok(movieService.findAll())
+    }
 }
