@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "FlixNet",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
