@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository
 
 @Repository
-interface MovieRepository : JpaRepository<Movie, String> {
+interface MovieRepository : JpaRepository<Movie, Long> {
     @Query("""
         SELECT m FROM Movie m
         WHERE (:state IS NULL OR m.state = :state)
@@ -30,7 +30,7 @@ interface MovieRepository : JpaRepository<Movie, String> {
     @Modifying
     @Query("UPDATE Movie m SET m.state = :state WHERE m.id IN :ids")
     fun updateMovieStates(
-        @Param("ids") ids: List<String>,
+        @Param("ids") ids: List<Long>,
         @Param("state") state: State,
     )
 }

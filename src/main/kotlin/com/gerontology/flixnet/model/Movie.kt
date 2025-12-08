@@ -13,9 +13,9 @@ import jakarta.persistence.Table
 @Table(name = "movies")
 data class Movie(
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    val id: String = "",
+    val id: Long,
 
     @Column(name = "title")
     val title: String = "",

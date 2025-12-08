@@ -10,10 +10,8 @@ import org.springframework.stereotype.Service
 @Service
 class MovieService(private val movieRepository: MovieRepository) {
 
-    fun findById(id: String): Movie {
-        return movieRepository.findById(id).orElseThrow {
-            MovieNotFoundException("Movie with id $id not found")
-        }
+    fun findById(id: Long): Movie? {
+        return movieRepository.findById(id).orElse(null)
     }
 
     fun findAll(): List<Movie> {
@@ -35,12 +33,12 @@ class MovieService(private val movieRepository: MovieRepository) {
     }
 
     @Transactional
-    open fun updateMovieStates(ids: List<String>, state: State) {
+    open fun updateMovieStates(ids: List<Long>, state: State) {
         return movieRepository.updateMovieStates(ids, state)
     }
 
     @Transactional
-    fun deleteById(id: String) {
+    fun deleteById(id: Long) {
         movieRepository.deleteById(id)
     }
 

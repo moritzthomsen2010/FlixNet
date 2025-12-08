@@ -26,7 +26,7 @@ class MovieController(private val movieService: MovieService) {
     }
 
     @GetMapping("/{id}")
-    fun getMovie(@PathVariable("id") id: String): ResponseEntity<Movie> {
+    fun getMovie(@PathVariable("id") id: Long): ResponseEntity<Movie> {
         val foundMovie: Movie? = movieService.findById(id)
 
         return if (foundMovie != null) {
@@ -50,7 +50,7 @@ class MovieController(private val movieService: MovieService) {
 
     @Transactional
     @DeleteMapping("/{id}")
-    fun deleteMovie(@PathVariable("id") id: String): ResponseEntity<Movie> {
+    fun deleteMovie(@PathVariable("id") id: Long): ResponseEntity<Movie> {
         movieService.deleteById(id)
         return ResponseEntity(HttpStatus.NO_CONTENT)
     }
