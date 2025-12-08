@@ -1,4 +1,14 @@
 services:
+
+  app:
+    build: .
+    container_name: flixnet-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    restart: unless-stopped
+
   db:
     image: postgres:latest
     container_name: flixnet-db
@@ -10,15 +20,6 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql
-    restart: unless-stopped
-
-  app:
-    build: .
-    container_name: flixnet-app
-    ports:
-      - "8080:8080"
-    depends_on:
-      - db
     restart: unless-stopped
 
 volumes:

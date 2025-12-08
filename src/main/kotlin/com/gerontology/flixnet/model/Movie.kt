@@ -2,6 +2,8 @@ package com.gerontology.flixnet.model
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
@@ -11,9 +13,9 @@ import jakarta.persistence.Table
 @Table(name = "movies")
 data class Movie(
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
-    val id: Long = 0,
+    val id: String = "",
 
     @Column(name = "title")
     val title: String = "",
@@ -21,6 +23,10 @@ data class Movie(
     @Column(name = "genre")
     val genre: String = "",
 
-    @Column(name = "rental_status")
-    val rentalStatus: String = ""
+    @Column(name = "state")
+    @Enumerated(EnumType.STRING)
+    val state: State = State.AVAILABLE,
+
+    @Column(name = "length_in_minutes")
+    val lengthInMinutes: Int = 0,
 )

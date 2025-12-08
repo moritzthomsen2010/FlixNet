@@ -2,6 +2,7 @@ package com.gerontology.flixnet.controller
 
 import com.gerontology.flixnet.model.Movie
 import com.gerontology.flixnet.service.MovieService
+import jakarta.transaction.Transactional
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.http.ResponseEntity.notFound
@@ -25,7 +26,7 @@ class MovieController(private val movieService: MovieService) {
     }
 
     @GetMapping("/{id}")
-    fun getMovie(@PathVariable("id") id: Long): ResponseEntity<Movie> {
+    fun getMovie(@PathVariable("id") id: String): ResponseEntity<Movie> {
         val foundMovie: Movie? = movieService.findById(id)
 
         return if (foundMovie != null) {
@@ -35,18 +36,21 @@ class MovieController(private val movieService: MovieService) {
         }
     }
 
+    @Transactional
     @PostMapping("/")
     fun createMovie(@RequestBody movie: Movie): ResponseEntity<Movie> {
         return ok(movieService.save(movie))
     }
 
+    @Transactional
     @PutMapping("/")
     fun updateMovie(@RequestBody movie: Movie): ResponseEntity<Movie> {
         return ok(movieService.updateMovie(movie))
     }
 
+    @Transactional
     @DeleteMapping("/{id}")
-    fun deleteMovie(@PathVariable("id") id: Long): ResponseEntity<Movie> {
+    fun deleteMovie(@PathVariable("id") id: String): ResponseEntity<Movie> {
         movieService.deleteById(id)
         return ResponseEntity(HttpStatus.NO_CONTENT)
     }
